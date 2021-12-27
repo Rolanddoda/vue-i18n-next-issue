@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import { addMessages, setI18nLanguage, SUPPORTED_LOCALES } from "@/i18n";
+import { addMessages, setI18nLanguage } from "@/i18n";
 
 const routes = [
   {
@@ -37,8 +37,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  if (SUPPORTED_LOCALES.has(to.params.locale) && to.meta.loadTranslation) {
-    const messages = await to.meta.loadTranslation(to.params.locale);
+  if (to.meta.loadTranslation) {
+    const messages = await to.meta.loadTranslation("en");
     await addMessages(to.params.locale, messages.default);
     setI18nLanguage(to.params.locale);
   }

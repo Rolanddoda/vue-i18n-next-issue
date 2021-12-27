@@ -1,10 +1,6 @@
 import { nextTick } from "vue";
 import { createI18n } from "vue-i18n";
 
-export const SUPPORTED_LOCALES = new Map();
-SUPPORTED_LOCALES.set("en", { value: "en", label: "English" });
-SUPPORTED_LOCALES.set("de", { value: "de", label: "Dutch" });
-
 export const i18n = createI18n({
   globalInjection: true,
   legacy: false,
