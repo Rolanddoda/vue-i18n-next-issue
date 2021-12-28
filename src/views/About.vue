@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an about page {{ $t("page") }}</h1>
-    <p>{{ $t("localMsg") }}</p>
+    <p>{{ t("localMsg") }}</p>
   </div>
 </template>
 

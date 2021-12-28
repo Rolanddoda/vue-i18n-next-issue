@@ -1,33 +1,45 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import { addMessages, setI18nLanguage } from "@/i18n";
+import RouterView from "./RouterView";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
-    meta: {
-      loadTranslation: (locale) =>
-        import(
-          /* webpackChunkName: "lang-[request]" */ `./home-translation/${locale}.js`
-        ),
-    },
+    redirect: `/en`,
   },
+
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-    meta: {
-      loadTranslation: (locale) =>
-        import(
-          /* webpackChunkName: "lang-[request]" */ `./about-translation/${locale}.js`
-        ),
-    },
+    path: "/:locale",
+    component: RouterView,
+    children: [
+      {
+        path: "",
+        name: "Home",
+        component: Home,
+        meta: {
+          loadTranslation: (locale) =>
+            import(
+              /* webpackChunkName: "lang-[request]" */ `./home-translation/${locale}.js`
+            ),
+        },
+      },
+      {
+        path: "about",
+        name: "About",
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/About.vue"),
+        meta: {
+          loadTranslation: (locale) =>
+            import(
+              /* webpackChunkName: "lang-[request]" */ `./about-translation/${locale}.js`
+            ),
+        },
+      },
+    ],
   },
 ];
 

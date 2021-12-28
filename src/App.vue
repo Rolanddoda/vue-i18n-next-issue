@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <button @click="$router.push({ name: 'Home' })">Home page</button>
+    <button @click="$router.push({ name: 'About' })">Home page</button>
   </div>
   <router-view />
 </template>
